@@ -54,6 +54,7 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 graphrag-factory = { workspace = true }
+graphrag-config = { workspace = true }
 
 # Keep poethepoet for task management to minimize changes
 [tool.poe.tasks]
@@ -69,6 +70,7 @@ _semversioner_changelog = "semversioner changelog > CHANGELOG.md"
 # Add more update toml tasks as packages are added
 _semversioner_update_graphrag_toml_version = "update-toml update --file packages/graphrag/pyproject.toml --path project.version --value $(uv run semversioner current-version)"
 _semversioner_update_graphrag_factory_toml_version = "update-toml update --file packages/graphrag-factory/pyproject.toml --path project.version --value $(uv run semversioner current-version)"
+_semversioner_update_graphrag_config_toml_version = "update-toml update --file packages/graphrag-config/pyproject.toml --path project.version --value $(uv run semversioner current-version)"
 _semversioner_update_workspace_dependency_versions = "python -m scripts.update_workspace_dependency_versions"
 semversioner_add = "semversioner add-change"
 coverage_report = 'coverage report --omit "**/tests/**" --show-missing'
@@ -103,6 +105,7 @@ sequence = [
     # Add more update toml tasks as packages are added
     '_semversioner_update_graphrag_toml_version',
     '_semversioner_update_graphrag_factory_toml_version',
+    '_semversioner_update_graphrag_config_toml_version',
     '_semversioner_update_workspace_dependency_versions',
     '_sync',
 ]
@@ -217,7 +220,7 @@ convention = "numpy"
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
-include = ["packages/graphrag/graphrag", "packages/graphrag-factory/graphrag_factory", "tests"]
+include = ["packages/graphrag/graphrag", "packages/graphrag-factory/graphrag_factory", "packages/graphrag-config/graphrag_config", "tests"]
 exclude = ["**/node_modules", "**/__pycache__"]
 
 [tool.pytest.ini_options]
